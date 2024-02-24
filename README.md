@@ -234,3 +234,176 @@ for item in my_array:
 Copy code
 squared_array = [x**2 for x in my_array]
 ```
+
+# Sorting Algorithms
+
+## Bubble Sort
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void bubbleSort(int arr[], int n)
+{
+    int i, j;
+    bool swapped;
+    for (i = 0; i < n - 1; i++)
+    {
+        swapped = false;
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        if (swapped == false)
+            break;
+    }
+}
+void printArray(int arr[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+        cout << " " << arr[i];
+}
+int main()
+{
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int N = sizeof(arr) / sizeof(arr[0]);
+    bubbleSort(arr, N);
+    cout << "Sorted array: \n";
+    printArray(arr, N);
+    return 0;
+}
+```
+
+```python
+def bubbleSort(array):
+    n = len(array)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True
+        if (swapped == False):
+            break
+
+if __name__ == "__main__":
+    arr = [64, 34, 25, 12, 22, 11, 90]
+
+    bubbleSort(arr)
+
+    print("Sorted array:")
+    for i in range(len(arr)):
+        print("%d" % arr[i], end=" ")
+```
+
+## Selection Sort
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void selectionSort(int arr[], int n)
+{
+    int i, j, min_idx;
+
+    for (i = 0; i < n - 1; i++)
+    {
+        min_idx = i;
+        for (j = i + 1; j < n; j++)
+        {
+            if (arr[j] < arr[min_idx])
+                min_idx = j;
+        }
+        if (min_idx != i)
+            swap(arr[min_idx], arr[i]);
+    }
+}
+void printArray(int arr[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        cout << arr[i] << " ";
+        cout << endl;
+    }
+}
+int main()
+{
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    selectionSort(arr, n);
+    cout << "Sorted array: \n";
+    printArray(arr, n);
+    return 0;
+}
+```
+
+```python
+def selectionSort(array):
+    n = len(array)
+
+    for i in range(n):
+        min = i
+        for j in range(i+1, n):
+            if array[min] > array[j]:
+                min = j
+
+        array[i], array[min] = array[min], array[i]
+
+if __name__ == "__main__":
+    arr = [64, 34, 25, 12, 22, 11, 90]
+
+    selectionSort(arr)
+
+    print("Sorted array:")
+    for i in range(len(arr)):
+        print("%d" % arr[i], end=" ")
+```
+
+## Insertion Sort
+
+```cpp
+
+```
+
+```python
+
+```
+
+```cpp
+
+```
+
+```python
+
+```
+
+```cpp
+
+```
+
+```python
+
+```
+
+```cpp
+
+```
+
+```python
+
+```
+
+```cpp
+
+```
+
+```python
+
+```
