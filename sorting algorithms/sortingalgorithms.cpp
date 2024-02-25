@@ -1,84 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
-void merge(int array[], int const left, int const mid,
-           int const right)
+
+int partition(int arr[],int low,int high)
 {
-    int const subArrayOne = mid - left + 1;
-    int const subArrayTwo = right - mid;
+//choose the pivot
 
-    auto *leftArray = new int[subArrayOne],
-         *rightArray = new int[subArrayTwo];
-]
-    for (auto i = 0; i < subArrayOne; i++)
-        leftArray[i] = array[left + i];
-    for (auto j = 0; j < subArrayTwo; j++)
-        rightArray[j] = array[mid + 1 + j];
+int pivot=arr[high];
+//Index of smaller element and Indicate
+//the right position of pivot found so far
+int i=(low-1);
 
-    auto indexOfSubArrayOne = 0, indexOfSubArrayTwo = 0;
-    int indexOfMergedArray = left;
-
-    while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo)
-    {
-        if (leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo])
-        {
-            array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-            indexOfSubArrayOne++;
-        }
-        else
-        {
-            array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-            indexOfSubArrayTwo++;
-        }
-        indexOfMergedArray++;
-    }
-
-    while (indexOfSubArrayOne < subArrayOne)
-    {
-        array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-        indexOfSubArrayOne++;
-        indexOfMergedArray++;
-    }
-
-    while (indexOfSubArrayTwo < subArrayTwo)
-    {
-        array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-        indexOfSubArrayTwo++;
-        indexOfMergedArray++;
-    }
-    delete[] leftArray;
-    delete[] rightArray;
+for(int j=low;j<=high;j++)
+{
+	//If current element is smaller than the pivot
+	if(arr[j]<pivot)
+	{
+	//Increment index of smaller element
+	i++;
+	swap(arr[i],arr[j]);
+	}
+}
+swap(arr[i+1],arr[high]);
+return (i+1);
 }
 
-void mergeSort(int array[], int const begin, int const end)
+// The Quicksort function Implement
+			
+void quickSort(int arr[],int low,int high)
 {
-    if (begin >= end)
-        return;
-
-    int mid = begin + (end - begin) / 2;
-    mergeSort(array, begin, mid);
-    mergeSort(array, mid + 1, end);
-    merge(array, begin, mid, end);
+// when low is less than high
+	if(low<high)
+	{	
+		int pi=partition(arr,low,high);
+		
+		quickSort(arr,low,pi-1);
+		quickSort(arr,pi+1,high);
+	}
 }
+			
 
-void printArray(int A[], int size)
+int main() {
+int arr[]={10,7,8,9,1,5};
+int n=sizeof(arr)/sizeof(arr[0]);
+// Function call
+quickSort(arr,0,n-1);
+//Print the sorted array
+cout<<"Sorted Array\n";
+for(int i=0;i<n;i++)
 {
-    for (int i = 0; i < size; i++)
-        cout << A[i] << " ";
-    cout << endl;
+	cout<<arr[i]<<" ";
 }
-
-int main()
-{
-    int arr[] = {12, 11, 13, 5, 6, 7};
-    int arr_size = sizeof(arr) / sizeof(arr[0]);
-
-    cout << "Given array is \n";
-    printArray(arr, arr_size);
-
-    mergeSort(arr, 0, arr_size - 1);
-
-    cout << "\nSorted array is \n";
-    printArray(arr, arr_size);
-    return 0;
+return 0;
 }
-
+// This Code is Contributed By Diwakar Jha

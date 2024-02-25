@@ -1,41 +1,28 @@
 # Bubble Sort
-def mergeSort(arr): 
-    if len(arr) > 1:
-        mid = len(arr)//2
- 
-        L = arr[:mid]
- 
-        R = arr[mid:]
+def partition(array, low, high):
+    pivot = array[high]
 
-        mergeSort(L)
+    i = low - 1
 
-        mergeSort(R)
- 
-        i = j = k = 0
- 
-        while i < len(L) and j < len(R):
-            if L[i] <= R[j]:
-                arr[k] = L[i]
-                i += 1
-            else:
-                arr[k] = R[j]
-                j += 1
-            k += 1
- 
-        while i < len(L):
-            arr[k] = L[i]
+    for j in range(low,high):
+        if array[j] <= pivot:
             i += 1
-            k += 1
- 
-        while j < len(R):
-            arr[k] = R[j]
-            j += 1
-            k += 1
+            (array[i] , array[j]) =  (array[j] , array[i])
+
+    (array[i + 1] , array[high]) = (array[high] , array[i + 1])
+    return i + 1
+
+def quickSort(array, low, high):
+    if low < high:
+        pi = partition(array, low,high)
+        quickSort(arr,low,pi-1)
+        quickSort(arr,pi+1,high)
+
 
 if __name__ == "__main__":
     arr = [64, 34, 25, 12, 22, 11, 90]
  
-    mergeSort(arr)
+    quickSort(arr , 0, len(arr) - 1)
  
     print("Sorted array:")
     for i in range(len(arr)):
